@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <thread>
 #include <chrono>
+
+
 using namespace std;
 
 
@@ -14,9 +16,14 @@ class Macchina{
    
     public:
     int rpm, vel;
-    int posx = 0;
+    int pos = 0;
     char gear;
     bool accensione = false;
+    
+
+    
+
+    
 
     
     Macchina (string modello){
@@ -31,12 +38,17 @@ class Macchina{
         return title;
     }
 
+
+    void vediStato(){
+        cout<<endl<<accensione;
+    }
     void accendi(){
         
         accensione = true;
         rpm = 1000;
         vel = 0;
         gear = 'n';
+        vediStato();
 
     }
 
@@ -46,20 +58,20 @@ class Macchina{
         rpm = 0;
         vel = 0;
         gear = '/';
+        vediStato();
 
     }
 
 
-    int muovi_avanti()
-    {
-        posx = posx + 10;
-        return posx;
+    void muovi_avanti()
+    {   
+        pos = pos + 10;
+        
     }
 
-    int muovi_indietro()
+    void muovi_indietro()
     {
-        posx = posx - 10;
-        return posx;
+        pos = pos - 10;
 
     }
 
@@ -82,7 +94,7 @@ class Macchina{
     
     cout<<endl;
     scrivi("Posizione attuale: ");
-    cout<<posx;
+    cout<<pos;
     }
 
     int accel(int marcia){
@@ -106,7 +118,6 @@ class Macchina{
 
 void loadingBar(){
 
-    system("color 0a");
     int a = 177, b = 219;
 
     printf("\n\n\n\n");
@@ -129,39 +140,55 @@ void loadingBar(){
 
 int main(){
 
+    loadingBar();
+    
     scrivi("Premi t per fermarti, w per andare avanti, s per andare indietro.");
     cout<<endl;
 
+    char alfa[256];
+    cin>>alfa;
+    
+
+
+
     Macchina autom_uno("Toyota");
-    autom_uno.movimento();
+    autom_uno.accendi();
 
 
     int input_utente;
     int *cavallo;
+    char *point = alfa;
     cavallo = &input_utente;
-    cout<<cavallo<<endl;
+    //cout<<cavallo<<"1 "<<endl;
+    cout<<point<<"1333 "<<endl;
 
     scrivi("Maremma");
     usleep(2000000);
-    scrivi("Ciao");
 
+
+    int pos = 0;
+    char direzione;
+    do{
+        cin >> direzione;
+        
+            if (direzione == 'w')
+            {
+            pos = pos + 10;
+            }
+            else if (direzione == 's')
+            {
+            pos = pos - 10;
+            }
+        }while(direzione !='t');
+    
+    cout<<endl;
+    scrivi("Posizione attuale: ");
+    cout<<pos;
+    
+    cout<<endl<<alfa;
    
     return 0;
 }
 
-
-
-int somma(int uno, int due){
-   
-
-    int somma = uno + due;
-    cout<<endl<<somma<<endl;
-
-    return somma;
-}
-
-/* $ g++ primi.cpp
-$ ./a.out
-Hello World */
 
 
