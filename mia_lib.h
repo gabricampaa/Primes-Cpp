@@ -7,3 +7,8 @@ string scrivi(string input){
     return input;
     
 }
+
+
+void aCapo(){
+    cout<<endl;
+}
